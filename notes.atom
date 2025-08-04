@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>My Notes</title>
+  <id>urn:uuid:4c7f8a4c-5a29-11ee-8c99-0242ac120002</id>
+  <updated>2025-08-04T12:00:00Z</updated>
+  <author>
+    <name>Your Name</name>
+  </author>
+  <link rel="self" href="file:///C:/Users/You/Documents/notes.atom" type="application/atom+xml"/>
+
+  <entry>
+    <title>First Note</title>
+    <id>urn:uuid:1b4e28ba-2fa1-11d2-883f-0016d3cca427</id>
+    <updated>2025-08-04T12:00:00Z</updated>
+    <summary>This is my first note.</summary>
+    <link href="file:///C:/Users/You/Documents/notes/first-note.html" />
+  </entry>
+</feed>
