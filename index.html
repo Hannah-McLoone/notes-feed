@@ -22,7 +22,12 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      max-width: 50%; /* makes non-row images about half the size */
+      max-width: 50%; /* default: makes images about half the width */
+    }
+
+    .limited-size {
+      max-width: 600px;
+      width: 100%;
     }
 
     .figure {
@@ -44,23 +49,23 @@
 </head>
 <body>
 
-  <h1>Kernel Density Estimation</h1>
   <p>
     For my project, I’m using ranger GPS data to identify existing footpaths and estimate movement speeds. The goal is to train a model that can predict how fast rangers are likely to move through different terrain, to support better planning when tracking and intercepting poachers. 
     
     My main focus of the first couple weeks has been on developing a method to estimate the likelihood that a footpath exists at any given location. To do this, I’m using kernel density ranking based on GPS point data.
   </p>
 
+  <h2>Kernel Density Estimation</h2>
+
   <div class="figure">
-    <img src="graphs/first_row.png">
+    <img src="graphs/first_row.png" class="limited-size">
   </div>
 
   <p>
     Figure 1: A 2D Gaussian distribution is centered at each data point, where the intensity is highest at the point itself and decreases with distance. 
   </p>
   <p>
-    Figure 2: Where these Gaussians overlap, their intensities are summed, resulting in a heatmap storing the cumulative density of nearby points. This connects some points on the path
-
+    Figure 2: Where these Gaussians overlap, their intensities are summed, resulting in a heatmap storing the cumulative density of nearby points. This connects some points on the path.
   </p>
 
   <h4>Implementation Practicalities</h4>
@@ -76,7 +81,7 @@
   <h2>Kernel Density Ranking</h2>
   <p>
     The raw intensity values are skewed by the very large amount of time spent at base camp (figure 3 shows this). 
-    Ranking the values instead results in Figure 4, reducing the effect of the skew
+    Ranking the values instead results in Figure 4, reducing the effect of the skew.
   </p>
 
   <div class="figure">
@@ -85,7 +90,7 @@
 
   <h2>Adding Speed</h2>
   <p>
-    Data is stored as sequential <code>[x, y, time]</code> entries. Distance between consecutive points is calculated 
+    The gps data is stored as sequential <code>[x, y, time]</code> entries. Distance between consecutive points is calculated 
     using the Haversine formula. Speed is derived from the distance and time difference.
   </p>
   <p>
@@ -95,7 +100,6 @@
 
   <div class="figure">
     <img src="graphs/equation.png" alt="Speed Example">
-    <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
   </div>
   <div class="figure">
     <img src="graphs/equation2.png" alt="Speed Example">
@@ -108,31 +112,19 @@
   </div>
 
   <h3>Speed vs Path</h3>
-  <p>Do we see a relationship between speed and path intensity or rank?</p>
+  <p>Just out of interest I wanted to see if we could see a relationship between speed and path intensity or rank?</p>
 
   <div class="figure">
     <img src="graphs/correlation.png" alt="Speed vs Intensity">
     <div class="figure-caption">Speed vs Path Intensity</div>
   </div>
 
-  <p>No, no we can’t.</p>
+  <p>Nothing striking.</p>
 
   <h2>Calculating Directional Speed</h2>
   <p>
     To investigate slope effects, we measure speed in four directions (N, S, E, W). 
     This is done by computing vector components between GPS points.
-  </p>
-
-  <p>
-    For example:
-    <ul>
-      <li>1-2: √2 units North and √2 units East</li>
-      <li>2-3: 1 unit East</li>
-      <li>3-4: Some units East and South</li>
-    </ul>
-  </p>
-
-  <p>
     These are stored in four separate directional speed maps.
   </p>
 
@@ -149,9 +141,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
