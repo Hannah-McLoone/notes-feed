@@ -11,20 +11,22 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     h1, h2 {
       color: #2c3e50;
     }
-.image-row {
-  display: flex;
-  justify-content: center; /* centers the row */
-  gap: 2em;                /* adds space between images */
-  margin: 2em 0;
-}
 
-.image-row img {
-  width: 300px;            /* or any size you prefer */
-  height: auto;
-}
+    .image-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      margin: 2em 0;
+    }
+
+    .image-row img {
+      width: 150px; /* Smaller width for row images */
+      height: auto;
+    }
 
     img {
       height: auto;
@@ -34,27 +36,16 @@
       margin-right: auto;
     }
 
-    /* Individual image sizes (adjust these manually) */
-    #img1 { width: 80px; }
-    #img2 { width: 80px; }
-    #img3 { width: 350px; }
-    #img4 { width: 350px; }
-    #img5 { width: 300px; }
-    #img6 { width: 300px; }
-    #img7 { width: 300px; }
-    #img8 { width: 300px; }
-    #img9 { width: 400px; }
-    #img10 { width: 400px; }
-    #img11 { width: 400px; }
-
     .figure {
       text-align: center;
       margin-bottom: 2em;
     }
+
     .figure-caption {
       font-style: italic;
       color: #555;
     }
+
     code {
       background-color: #eee;
       padding: 0.2em 0.4em;
@@ -70,8 +61,8 @@
   </p>
 
   <div class="image-row">
-    <img id="img1" src="graphs/blob.png" alt="Figure 1">
-    <img id="img2" src="graphs/blob_line.png" alt="Figure 2">
+    <img src="graphs/blob.png" alt="Figure 1">
+    <img src="graphs/blob_line.png" alt="Figure 2">
   </div>
 
   <h3>Implementation Practicalities</h3>
@@ -89,14 +80,13 @@
     The raw intensity values are skewed by time spent at base camp. 
     Figure 3 shows the raw values; base camp dominates due to its exponential intensity.
     Ranking the values instead results in Figure 4.
-     Raw intensity values – base camp dominates.
+    Raw intensity values – base camp dominates.
     Ranked intensity values, reducing skew
   </p>
 
-
   <div class="image-row">
-    <img id="img3" src="graphs/intensity.png" alt="Figure 3">
-    <img id="img4" src="graphs/ranking.png" alt="Figure 4">
+    <img src="graphs/intensity.png" alt="Figure 3">
+    <img src="graphs/ranking.png" alt="Figure 4">
   </div>
 
   <h2>Adding Speed</h2>
@@ -110,24 +100,24 @@
   </p>
 
   <div class="figure">
-    <img id="img5" src="graphs/Figure_1.png" alt="Speed Example">
+    <img src="graphs/Figure_1.png" alt="Speed Example">
     <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
   </div>
   <div class="figure">
-    <img id="img6" src="graphs/Figure_2.png" alt="Speed Example">
+    <img src="graphs/Figure_2.png" alt="Speed Example">
     <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
   </div>
   <div class="figure">
-    <img id="img7" src="graphs/Figure_3.png" alt="Speed Example">
+    <img src="graphs/Figure_3.png" alt="Speed Example">
     <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
   </div>
   <div class="figure">
-    <img id="img8" src="graphs/Figure_4.png" alt="Speed Example">
+    <img src="graphs/Figure_4.png" alt="Speed Example">
     <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
   </div>
 
   <div class="figure">
-    <img id="img9" src="graphs/speed.png" alt="Average Speed">
+    <img src="graphs/speed.png" alt="Average Speed">
     <div class="figure-caption">Full average speed plot (white = null).</div>
   </div>
 
@@ -135,7 +125,7 @@
   <p>Do we see a relationship between speed and path intensity or rank?</p>
 
   <div class="figure">
-    <img id="img10" src="graphs/correlation.png" alt="Speed vs Intensity">
+    <img src="graphs/correlation.png" alt="Speed vs Intensity">
     <div class="figure-caption">Speed vs Path Intensity</div>
   </div>
 
@@ -167,12 +157,9 @@
   </p>
 
   <div class="figure">
-    <img id="img11" src="graphs/directions.png" alt="North vs South">
+    <img src="graphs/directions.png" alt="North vs South">
     <div class="figure-caption">North vs South Speed Comparison</div>
   </div>
 
 </body>
 </html>
-
-
-
