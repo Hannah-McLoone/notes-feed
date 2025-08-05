@@ -1,50 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Work Notes</title>
-  <link rel="alternate" type="application/atom+xml" title="My Work Notes Feed" href="notes.atom" />
+  <meta charset="UTF-8">
+  <title>Kernel Density Estimation Analysis</title>
   <style>
     body {
-      font-family: system-ui, sans-serif;
-      max-width: 700px;
-      margin: 3rem auto;
-      padding: 1rem;
+      font-family: Arial, sans-serif;
+      margin: 2em;
       line-height: 1.6;
-      background: #f9f9f9;
-      color: #222;
+      background-color: #f9f9f9;
+      color: #333;
     }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+    h1, h2 {
+      color: #2c3e50;
     }
-    a.feed-link {
-      display: inline-block;
-      margin: 1rem 0;
-      text-decoration: none;
-      color: #007acc;
-      font-weight: bold;
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 1em 0;
     }
-    ul {
-      padding-left: 1rem;
+    .figure {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+    .figure-caption {
+      font-style: italic;
+      color: #555;
+    }
+    code {
+      background-color: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
     }
   </style>
 </head>
 <body>
-  <h1>My Work Notes</h1>
 
-  <p>Welcome to my notes page. You can subscribe to updates using the Atom feed below:</p>
+  <h1>Kernel Density Estimation</h1>
 
-  <a class="feed-link" href="notes.atom">📡 View Atom Feed</a>
+  <div class="figure">
+    <img src="figure1.png" alt="Figure 1">
+    <div class="figure-caption">Figure 1: A 2D Gaussian distribution is centered at each data point.</div>
+  </div>
 
-  <h2>Recent Notes</h2>
-  <ul>
-    <li>Note 1 - <em>Aug 2025</em></li>
-    <li>Note 2 - <em>Late July 2025</em></li>
-    <li>Note 3 - <em>Mid July 2025</em></li>
-  </ul>
+  <div class="figure">
+    <img src="figure2.png" alt="Figure 2">
+    <div class="figure-caption">Figure 2: Overlapping Gaussians result in a cumulative density heatmap.</div>
+  </div>
 
-  <p><small>This site is hosted on GitHub Pages. Atom feed is auto-generated.</small></p>
+  <h2>Implementation Practicalities</h2>
+  <p>
+    The values for each pixel of the Gaussian are computed once and then “stamped” over each GPS point. 
+    They do not need to be recomputed every time.
+  </p>
+  <p>
+    Further consideration into the standard deviation of the Gaussian is needed. The current value is arbitrary, 
+    based on what looked visually reasonable with real data. Research is needed to determine how it should relate to the real data.
+  </p>
+
+  <h2>Kernel Density Ranking</h2>
+  <p>
+    The raw intensity values are skewed by time spent at base camp. 
+    Figure 3 shows the raw values; base camp dominates due to its exponential intensity.
+    Ranking the values instead results in Figure 4.
+  </p>
+
+  <div class="figure">
+    <img src="figure3.png" alt="Figure 3">
+    <div class="figure-caption">Figure 3: Raw intensity values – base camp dominates.</div>
+  </div>
+
+  <div class="figure">
+    <img src="figure4.png" alt="Figure 4">
+    <div class="figure-caption">Figure 4: Ranked intensity values, reducing skew.</div>
+  </div>
+
+  <h2>Adding Speed</h2>
+  <p>
+    Data is stored as sequential <code>[x, y, time]</code> entries. Distance between consecutive points is calculated 
+    using the Haversine formula. Speed is derived from the distance and time difference.
+  </p>
+  <p>
+    Each point is assigned the speed required to reach it from the previous one. 
+    We then compute a weighted average speed for each pixel using Gaussian intensity weights.
+  </p>
+
+  <div class="figure">
+    <img src="speed_example.png" alt="Speed Example">
+    <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
+  </div>
+
+  <div class="figure">
+    <img src="average_speed.png" alt="Average Speed">
+    <div class="figure-caption">Full average speed plot (white = null).</div>
+  </div>
+
+  <h3>Speed vs Path</h3>
+  <p>Do we see a relationship between speed and path intensity or rank?</p>
+
+  <div class="figure">
+    <img src="speed_vs_intensity.png" alt="Speed vs Intensity">
+    <div class="figure-caption">Speed vs Path Intensity</div>
+  </div>
+
+  <div class="figure">
+    <img src="speed_vs_rank.png" alt="Speed vs Rank">
+    <div class="figure-caption">Speed vs Rank</div>
+  </div>
+
+  <p>No, no we can’t.</p>
+
+  <h2>Calculating Directional Speed</h2>
+  <p>
+    To investigate slope effects, we measure speed in four directions (N, S, E, W). 
+    This is done by computing vector components between GPS points.
+  </p>
+
+  <p>
+    For example:
+    <ul>
+      <li>1-2: √2 units North and √2 units East</li>
+      <li>2-3: 1 unit East</li>
+      <li>3-4: Some units East and South</li>
+    </ul>
+  </p>
+
+  <p>
+    These are stored in four separate directional speed maps.
+  </p>
+
+  <h3>North vs South / East vs West</h3>
+  <p>
+    We checked if it’s significantly faster in certain directions due to terrain (e.g., steep hills).
+    No major differences observed.
+  </p>
+
+  <div class="figure">
+    <img src="north_vs_south.png" alt="North vs South">
+    <div class="figure-caption">North vs South Speed Comparison</div>
+  </div>
+
+  <div class="figure">
+    <img src="east_vs_west.png" alt="East vs West">
+    <div class="figure-caption">East vs West Speed Comparison</div>
+  </div>
+
 </body>
 </html>
