@@ -53,18 +53,16 @@
 <body>
 
   <h1>Kernel Density Estimation</h1>
+  <p>
+    This project leverages ranger GPS data to identify existing footpaths and estimate speed of movement in order to train a predictive model. At the core of the method is estimating the likelihood of a footpath's existence at any given location. This is achieved using density ranking based on GPS data [1], which applies kernel density estimation to assess the intensity of GPS activity. For each location on a raster, the intensity is calculated by summing the contributions of nearby GPS points, weighted by a Gaussian kernel that decreases with distance. The resulting density values are then ranked to identify likely footpaths.
+  </p>
 
-  <div class="figure">
+  <div class="image-row">
     <img id="img1" src="graphs/blob.png" alt="Figure 1">
-    <div class="figure-caption">Figure 1: A 2D Gaussian distribution is centered at each data point.</div>
-  </div>
-
-  <div class="figure">
     <img id="img2" src="graphs/blob_line.png" alt="Figure 2">
-    <div class="figure-caption">Figure 2: Overlapping Gaussians result in a cumulative density heatmap.</div>
   </div>
 
-  <h2>Implementation Practicalities</h2>
+  <h3>Implementation Practicalities</h3>
   <p>
     The values for each pixel of the Gaussian are computed once and then “stamped” over each GPS point. 
     They do not need to be recomputed every time.
@@ -79,16 +77,14 @@
     The raw intensity values are skewed by time spent at base camp. 
     Figure 3 shows the raw values; base camp dominates due to its exponential intensity.
     Ranking the values instead results in Figure 4.
+     Raw intensity values – base camp dominates.
+    Ranked intensity values, reducing skew
   </p>
 
-  <div class="figure">
-    <img id="img3" src="graphs/intensity.png" alt="Figure 3">
-    <div class="figure-caption">Figure 3: Raw intensity values – base camp dominates.</div>
-  </div>
 
-  <div class="figure">
+  <div class="image-row">
+    <img id="img3" src="graphs/intensity.png" alt="Figure 3">
     <img id="img4" src="graphs/ranking.png" alt="Figure 4">
-    <div class="figure-caption">Figure 4: Ranked intensity values, reducing skew.</div>
   </div>
 
   <h2>Adding Speed</h2>
@@ -165,3 +161,4 @@
 
 </body>
 </html>
+
