@@ -46,14 +46,23 @@
 
   <h1>Kernel Density Estimation</h1>
   <p>
-    This project leverages ranger GPS data to identify existing footpaths and estimate speed of movement in order to train a predictive model. At the core of the method is estimating the likelihood of a footpath's existence at any given location. This is achieved using density ranking based on GPS data [1], which applies kernel density estimation to assess the intensity of GPS activity. For each location on a raster, the intensity is calculated by summing the contributions of nearby GPS points, weighted by a Gaussian kernel that decreases with distance. The resulting density values are then ranked to identify likely footpaths.
+    For my project, I’m using ranger GPS data to identify existing footpaths and estimate movement speeds. The goal is to train a model that can predict how fast rangers are likely to move through different terrain, to support better planning when tracking and intercepting poachers. 
+    
+    My main focus of the first couple weeks has been on developing a method to estimate the likelihood that a footpath exists at any given location. To do this, I’m using kernel density ranking based on GPS point data.
   </p>
 
   <div class="figure">
-    <img src="graphs/row1.png">
+    <img src="graphs/first_row.png">
   </div>
 
-  <h3>Implementation Practicalities</h3>
+  <p>
+    Figure 1: A 2D Gaussian distribution is centered at each data point, where the intensity is highest at the point itself and decreases with distance. 
+
+    Figure 2: Where these Gaussians overlap, their intensities are summed, resulting in a heatmap storing the cumulative density of nearby points. This connects some points on the path
+
+  </p>
+
+  <h5>Implementation Practicalities</h5>
   <p>
     The values for each pixel of the Gaussian are computed once and then “stamped” over each GPS point. 
     They do not need to be recomputed every time.
@@ -142,6 +151,7 @@
 
 </body>
 </html>
+
 
 
 
