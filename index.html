@@ -57,12 +57,13 @@
 
   <p>
     Figure 1: A 2D Gaussian distribution is centered at each data point, where the intensity is highest at the point itself and decreases with distance. 
-
+  </p>
+  <p>
     Figure 2: Where these Gaussians overlap, their intensities are summed, resulting in a heatmap storing the cumulative density of nearby points. This connects some points on the path
 
   </p>
 
-  <h5>Implementation Practicalities</h5>
+  <h4>Implementation Practicalities</h4>
   <p>
     The values for each pixel of the Gaussian are computed once and then “stamped” over each GPS point. 
     They do not need to be recomputed every time.
@@ -148,6 +149,7 @@
 
 </body>
 </html>
+
 
 
 
