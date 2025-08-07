@@ -1,144 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kernel Density Estimation Analysis</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Pages</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 2em;
-      line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
     }
-
-    h1, h2 {
-      color: #2c3e50;
-    }
-
-    img {
-      height: auto;
-      margin: 1em 0;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 50%; /* default: makes images about half the width */
-    }
-
-    .limited-size {
-      max-width: 400px;
-      width: 100%;
-    }
-
-    .figure {
+    header {
+      background: #333;
+      padding: 1em;
       text-align: center;
-      margin-bottom: 2em;
     }
-
-    .figure-caption {
-      font-style: italic;
-      color: #555;
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5em;
     }
-
-    code {
-      background-color: #eee;
-      padding: 0.2em 0.4em;
-      border-radius: 3px;
+    nav a {
+      color: white;
+      background: #555;
+      padding: 0.75em 1em;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background: #777;
+    }
+    main {
+      padding: 2em;
+    }
+    footer {
+      background: #f1f1f1;
+      text-align: center;
+      padding: 1em;
+      margin-top: 2em;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Hannah's Weekly Notes</h1>
+    <nav>
+      <a href="week1.html">Week 1</a>
+      <a href="week2.html">Week 2</a>
+      <!-- Add more as needed -->
+    </nav>
+  </header>
 
-  <p>
-    For my project, I’m trying to understand the factors affecting the speed of movement of rangers traveling through parks in Nigeria with the goal of improving patrol planning and the interception of poachers. Rangers have been equipped with GPS trackers that log their location and time approximately every five minutes during their patrols. I’m using this GPS data to identify existing footpaths and estimate movement speeds across different terrain types. The ultimate aim is to train a model that can predict ranger movement speeds based on environmental and geographical conditions, enabling more effective route planning.  The first part of this project is focusing on identifying the existing footpaths. 
-  </p>
-  <p>
-    The main focus of the first couple weeks has been on developing a method to estimate the likelihood that a footpath exists at any given location. I began by focusing on Oban National Park, using GPS data collected by rangers during their patrols. While there are routes that rangers frequently travel, they sometimes deviate from these paths due to obstacles or to investigate findings such as poachers’ snares.
-    I need to differentiate the noise from the commonly traveled paths, and identify such paths. My first idea was on some kind of clustering of these gps lines, to group together the data, but ultimately i implemented kernel density ranking based on GPS point data
-  </p>
+  <main>
+    <!-- Example content for homepage or one of the week pages -->
+    <h2>Welcome!</h2>
+    <p>This is the template. Replace this with your page content.</p>
+  </main>
 
-  <h2>Kernel Density Estimation</h2>
-
-  <div class="figure">
-    <img src="graphs/first_row.png" class="limited-size">
-  </div>
-
-  <p>
-    Figure 1: A 2D Gaussian distribution is centered at each data point, where the intensity is highest at the point itself and decreases with distance. 
-  </p>
-  <p>
-    Figure 2: Where these Gaussians overlap, their intensities are summed, resulting in a heatmap storing the cumulative density of nearby points. This connects some points on the path.
-  </p>
-
-  <h4>Implementation Practicalities</h4>
-  <p>
-    The values for each pixel of the Gaussian are computed once and then “stamped” over each GPS point. 
-    They do not need to be recomputed every time.
-  </p>
-  <p>
-  I need to do further consideration into the standard deviation of the Gaussian. The current value is arbitrary, based on what looked visually reasonable with real data. I still need to do research to determine how it should relate to the real data.
-  </p>
-
-  <h2>Kernel Density Ranking</h2>
-  <p>
-  This produces the raw intensity values below. One issue with this is that it is skewed by the very large amount of time spent at base camp (the dot of base camp is the only thing visible). Kernel density ranking [<a href = "https://www.researchgate.net/profile/Yen-Chi-Chen-2/publication/319163812_Measuring_Human_Activity_Spaces_With_Density_Ranking_Based_on_GPS_Data/links/599935ca45851564432cf8a1/Measuring-Human-Activity-Spaces-With-Density-Ranking-Based-on-GPS-Data.pdf">link</a>] is used to reduce the effect of the skew.
-  </p>
-
-  <div class="figure">
-    <img src="graphs/row2.png">
-  </div>
-
-  <h2>Adding Speed</h2>
-  <p>
-    The gps data is stored as sequential <code>[x, y, time]</code> entries. Distance between consecutive points is calculated 
-    using the Haversine formula. Speed is derived from the distance and time difference.
-  </p>
-  <p>
-    Each point is assigned the speed required to reach it from the previous one. 
-    We then compute a weighted average speed for each pixel using Gaussian intensity weights.
-  </p>
-
-  <div class="figure">
-    <img src="graphs/equation.png" alt="Speed Example">
-  </div>
-  <div class="figure">
-    <img src="graphs/equation2.png" alt="Speed Example">
-    <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
-  </div>
-
-  <div class="figure">
-    <img src="graphs/speed.png" alt="Average Speed">
-    <div class="figure-caption">Full average speed plot (white = null).</div>
-  </div>
-
-  <h3>Speed vs Path</h3>
-  <p>Just out of interest I wanted to see if we could see a relationship between speed and path intensity or rank?</p>
-
-  <div class="figure">
-    <img src="graphs/correlation.png" alt="Speed vs Intensity">
-    <div class="figure-caption">Speed vs Path Intensity</div>
-  </div>
-
-  <p>Nothing striking.</p>
-
-  <h2>Calculating Directional Speed</h2>
-  <p>
-    To investigate slope effects, we measure speed in four directions (N, S, E, W). 
-    This is done by computing vector components between GPS points.
-    These are stored in four separate directional speed maps.
-  </p>
-
-  <h3>North vs South / East vs West</h3>
-  <p>
-    We checked if it’s significantly faster in certain directions due to terrain (e.g., steep hills).
-    No major differences observed.
-  </p>
-
-  <div class="figure">
-    <img src="graphs/directions.png" alt="North vs South">
-    <div class="figure-caption">North vs South Speed Comparison</div>
-  </div>
 
 </body>
 </html>
-
