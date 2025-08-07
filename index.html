@@ -238,9 +238,30 @@
 
   </main>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const dropdown = document.querySelector('.dropdown');
+    const button = dropdown.querySelector('.dropdown-button');
+
+    button.addEventListener('click', function (e) {
+      e.stopPropagation(); // Prevent bubbling to document
+      dropdown.classList.toggle('open');
+      const expanded = dropdown.classList.contains('open');
+      button.setAttribute('aria-expanded', expanded);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+        button.setAttribute('aria-expanded', false);
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
