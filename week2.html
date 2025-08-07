@@ -203,13 +203,15 @@
 
     <h2>Adding Speed</h2>
     <p>
-      The gps data is stored as sequential <code>[x, y, time]</code> entries. Distance between consecutive points is calculated 
-      using the Haversine formula. Speed is derived from the distance and time difference.
+      Incorporating speed into our map was initially a bit of a challenge. The original GPS data we received lacked timestamps. It was stored as a Shapefile containing patrol paths, each with a start and end date and an ID. These paths were composed of a series of points—however, the points themselves didn’t include time information.
     </p>
     <p>
-      Each point is assigned the speed required to reach it from the previous one. 
-      We then compute a weighted average speed for each pixel using Gaussian intensity weights.
+      Instead, we had access to waypoints—logs maintained by rangers during patrols. Every few hours, the rangers would note environmental conditions or signs of poacher activity. These observations included an x, y coordinate and a timestamp. Our initial approach was to interpolate speed along each path segment based on the sparse waypoints. However, since there were typically around 15 GPS path points for every waypoint entry, this would have significantly reduced the accuracy of our speed estimates.
     </p>
+    <p>
+      Fortunately, our contact at SMART later provided the data in GPX format. This version included a full sequence of [x, y, time] entries. Using this, we calculate the distance between consecutive points with the Haversine formula, then derive speed from the distance and time interval. 
+    </p>
+    <p>I assign each point the speed required to reach it from the previous one. I then compute a weighted average of speeds for each pixel in the map, using the intensity of the gaussian kernel as the weighting.</p>
 
     <div class="figure">
       <img src="graphs/equation.png" alt="Speed Example" class="reduced-size">
