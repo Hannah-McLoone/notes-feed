@@ -1,18 +1,147 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kernel Density Estimation Analysis</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Pages</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Georgia, serif;
       margin: 2em;
       line-height: 1.6;
       background-color: #f9f9f9;
       color: #333;
     }
 
-    h1, h2 {
+    header {
+      background: #fff;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2em;
+      color: #2c3e50;
+    }
+
+    /* Elegant nav links */
+    nav {
+      display: flex;
+      gap: 1em;
+    }
+
+    nav a {
+      color: #2c3e50;
+      background: transparent;
+      padding: 0.3em 0.6em;
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 1em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      border: none;
+      font-weight: 500;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #2c3e50;
+      color: white;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Dropdown container hidden by default */
+    .dropdown {
+      display: none;
+      position: relative;
+    }
+
+    /* Dropdown button style */
+    .dropdown-button {
+      background: transparent;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      color: #2c3e50;
+      padding: 0.3em 0.6em;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+
+    .dropdown-button:hover,
+    .dropdown-button:focus {
+      background-color: #2c3e50;
+      color: white;
+      outline: none;
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 0.3em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      min-width: 120px;
+      z-index: 10;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5em 1em;
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 400;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+      background-color: #2c3e50;
+      color: white;
+      outline: none;
+    }
+
+    /* Show dropdown menu when active */
+    .dropdown.open .dropdown-menu {
+      display: block;
+    }
+
+    /* Responsive behavior */
+    @media (max-width: 600px) {
+      nav {
+        display: none;
+      }
+      .dropdown {
+        display: block;
+      }
+    }
+
+    main {
+      padding: 2em;
+    }
+
+    footer {
+      background: #f1f1f1;
+      text-align: center;
+      padding: 1em;
+      margin-top: 2em;
+    }
+
+    h2 {
       color: #2c3e50;
     }
 
@@ -22,7 +151,7 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      max-width: 50%; /* default: makes images about half the width */
+      max-width: 50%;
     }
 
     .limited-size {
@@ -48,6 +177,26 @@
   </style>
 </head>
 <body>
+  <header>
+    <h1>Hannah's Weekly Notes</h1>
+
+    <nav>
+      <a href="week1.html">Week 1</a>
+      <a href="week2.html">Week 2</a>
+      <!-- Add more as needed -->
+    </nav>
+
+    <div class="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="dropdown-button" aria-label="Open navigation menu">☰</button>
+      <div class="dropdown-menu" role="menu" aria-label="Navigation menu">
+        <a href="index.html" role="menuitem">Week 1-2</a>
+        <a href="week2.html" role="menuitem">Week 2-3</a>
+        <!-- Add more as needed -->
+      </div>
+    </div>
+  </header>
+
+  <main>
 
 <h2>Adding Speed</h2>
   <p>
@@ -100,6 +249,30 @@
     <div class="figure-caption">North vs South Speed Comparison</div>
   </div>
 
+  </main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const dropdown = document.querySelector('.dropdown');
+    const button = dropdown.querySelector('.dropdown-button');
+
+    button.addEventListener('click', function (e) {
+      e.stopPropagation(); // Prevent bubbling to document
+      dropdown.classList.toggle('open');
+      const expanded = dropdown.classList.contains('open');
+      button.setAttribute('aria-expanded', expanded);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+        button.setAttribute('aria-expanded', false);
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
+
 
