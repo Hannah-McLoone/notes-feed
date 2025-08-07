@@ -146,6 +146,16 @@
       height: auto;
     }
 
+    .reduced-size {
+      max-width: 63%; /* 70% of 90% */
+    }
+
+    @media (max-width: 600px) {
+      .reduced-size {
+        max-width: 90%;
+      }
+    }
+
     .figure {
       text-align: center;
       margin-bottom: 2em;
@@ -195,15 +205,15 @@
     </p>
 
     <div class="figure">
-      <img src="graphs/equation.png" alt="Speed Example">
+      <img src="graphs/equation.png" alt="Speed Example" class="reduced-size">
     </div>
     <div class="figure">
-      <img src="graphs/equation2.png" alt="Speed Example">
+      <img src="graphs/equation2.png" alt="Speed Example" class="reduced-size">
       <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
     </div>
 
     <div class="figure">
-      <img src="graphs/speed.png" alt="Average Speed">
+      <img src="graphs/speed.png" alt="Average Speed" class="reduced-size">
       <div class="figure-caption">Full average speed plot (white = null).</div>
     </div>
 
