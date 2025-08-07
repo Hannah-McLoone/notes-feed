@@ -29,7 +29,6 @@
       color: #2c3e50;
     }
 
-    /* Elegant nav links */
     nav {
       display: flex;
       gap: 1em;
@@ -55,13 +54,11 @@
       cursor: pointer;
     }
 
-    /* Dropdown container hidden by default */
     .dropdown {
       display: none;
       position: relative;
     }
 
-    /* Dropdown button style */
     .dropdown-button {
       background: transparent;
       border: none;
@@ -80,7 +77,6 @@
       outline: none;
     }
 
-    /* Dropdown menu */
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -115,12 +111,10 @@
       outline: none;
     }
 
-    /* Show dropdown menu when active */
     .dropdown.open .dropdown-menu {
       display: block;
     }
 
-    /* Responsive behavior */
     @media (max-width: 600px) {
       nav {
         display: none;
@@ -146,22 +140,13 @@
     }
 
     img {
-      height: auto;
-      margin: 1em 0;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 50%;
-    }
-
-    .limited-size {
-      max-width: 400px;
-      width: 100%;
+      margin: 1.5em auto;
+      max-width: 90%;
+      height: auto;
     }
 
     .figure {
-      max-width: 400px;
-      width: 100%;
       text-align: center;
       margin-bottom: 2em;
     }
@@ -169,6 +154,7 @@
     .figure-caption {
       font-style: italic;
       color: #555;
+      margin-top: 0.5em;
     }
 
     code {
@@ -185,7 +171,6 @@
     <nav>
       <a href="index.html">Week 1-2</a>
       <a href="week2.html">Week 2-3</a>
-      <!-- Add more as needed -->
     </nav>
 
     <div class="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -193,88 +178,85 @@
       <div class="dropdown-menu" role="menu" aria-label="Navigation menu">
         <a href="index.html" role="menuitem">Week 1-2</a>
         <a href="week2.html" role="menuitem">Week 2-3</a>
-        <!-- Add more as needed -->
       </div>
     </div>
   </header>
 
   <main>
 
-<h2>Adding Speed</h2>
-  <p>
-    The gps data is stored as sequential <code>[x, y, time]</code> entries. Distance between consecutive points is calculated 
-    using the Haversine formula. Speed is derived from the distance and time difference.
-  </p>
-  <p>
-    Each point is assigned the speed required to reach it from the previous one. 
-    We then compute a weighted average speed for each pixel using Gaussian intensity weights.
-  </p>
+    <h2>Adding Speed</h2>
+    <p>
+      The gps data is stored as sequential <code>[x, y, time]</code> entries. Distance between consecutive points is calculated 
+      using the Haversine formula. Speed is derived from the distance and time difference.
+    </p>
+    <p>
+      Each point is assigned the speed required to reach it from the previous one. 
+      We then compute a weighted average speed for each pixel using Gaussian intensity weights.
+    </p>
 
-  <div class="figure">
-    <img src="graphs/equation.png" alt="Speed Example">
-  </div>
-  <div class="figure">
-    <img src="graphs/equation2.png" alt="Speed Example">
-    <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
-  </div>
+    <div class="figure">
+      <img src="graphs/equation.png" alt="Speed Example">
+    </div>
+    <div class="figure">
+      <img src="graphs/equation2.png" alt="Speed Example">
+      <div class="figure-caption">Example: Two points with speeds 100 and 50 respectively.</div>
+    </div>
 
-  <div class="figure">
-    <img src="graphs/speed.png" alt="Average Speed">
-    <div class="figure-caption">Full average speed plot (white = null).</div>
-  </div>
+    <div class="figure">
+      <img src="graphs/speed.png" alt="Average Speed">
+      <div class="figure-caption">Full average speed plot (white = null).</div>
+    </div>
 
-  <h3>Speed vs Path</h3>
-  <p>Just out of interest I wanted to see if we could see a relationship between speed and path intensity or rank?</p>
+    <h3>Speed vs Path</h3>
+    <p>Just out of interest I wanted to see if we could see a relationship between speed and path intensity or rank?</p>
 
-  <div class="figure">
-    <img src="graphs/correlation.png" alt="Speed vs Intensity">
-    <div class="figure-caption">Speed vs Path Intensity</div>
-  </div>
+    <div class="figure">
+      <img src="graphs/correlation.png" alt="Speed vs Intensity">
+      <div class="figure-caption">Speed vs Path Intensity</div>
+    </div>
 
-  <p>Nothing striking.</p>
+    <p>Nothing striking.</p>
 
-  <h2>Calculating Directional Speed</h2>
-  <p>
-    To investigate slope effects, we measure speed in four directions (N, S, E, W). 
-    This is done by computing vector components between GPS points.
-    These are stored in four separate directional speed maps.
-  </p>
+    <h2>Calculating Directional Speed</h2>
+    <p>
+      To investigate slope effects, we measure speed in four directions (N, S, E, W). 
+      This is done by computing vector components between GPS points.
+      These are stored in four separate directional speed maps.
+    </p>
 
-  <h3>North vs South / East vs West</h3>
-  <p>
-    We checked if it’s significantly faster in certain directions due to terrain (e.g., steep hills).
-    No major differences observed.
-  </p>
+    <h3>North vs South / East vs West</h3>
+    <p>
+      We checked if it’s significantly faster in certain directions due to terrain (e.g., steep hills).
+      No major differences observed.
+    </p>
 
-  <div class="figure">
-    <img src="graphs/directions.png" alt="North vs South">
-    <div class="figure-caption">North vs South Speed Comparison</div>
-  </div>
+    <div class="figure">
+      <img src="graphs/directions.png" alt="North vs South">
+      <div class="figure-caption">North vs South Speed Comparison</div>
+    </div>
 
   </main>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const dropdown = document.querySelector('.dropdown');
-    const button = dropdown.querySelector('.dropdown-button');
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdown = document.querySelector('.dropdown');
+      const button = dropdown.querySelector('.dropdown-button');
 
-    button.addEventListener('click', function (e) {
-      e.stopPropagation(); // Prevent bubbling to document
-      dropdown.classList.toggle('open');
-      const expanded = dropdown.classList.contains('open');
-      button.setAttribute('aria-expanded', expanded);
-    });
+      button.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+        const expanded = dropdown.classList.contains('open');
+        button.setAttribute('aria-expanded', expanded);
+      });
 
-    document.addEventListener('click', function (e) {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('open');
-        button.setAttribute('aria-expanded', false);
-      }
+      document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+          button.setAttribute('aria-expanded', false);
+        }
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
-
-
