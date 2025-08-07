@@ -150,9 +150,16 @@
       max-width: 63%; /* 70% of 90% */
     }
 
+    .smaller-size {
+      max-width: 42%; /* 2/3 of reduced-size */
+    }
+
     @media (max-width: 600px) {
       .reduced-size {
         max-width: 90%;
+      }
+      .smaller-size {
+        max-width: 70%;
       }
     }
 
@@ -179,8 +186,8 @@
     <h1>Hannah's Weekly Notes</h1>
 
     <nav>
-      <a href="index.html">Week 1-2</a>
-      <a href="week2.html">Week 2-3</a>
+      <a href="index.html">Week 1-2</a>
+      <a href="week2.html">Week 2-3</a>
     </nav>
 
     <div class="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -213,7 +220,7 @@
     </div>
 
     <div class="figure">
-      <img src="graphs/speed.png" alt="Average Speed" class="reduced-size">
+      <img src="graphs/speed.png" alt="Average Speed" class="reduced-size smaller-size">
       <div class="figure-caption">Full average speed plot (white = null).</div>
     </div>
 
