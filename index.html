@@ -50,9 +50,11 @@
 <body>
 
   <p>
-    For my project, I’m using ranger GPS data to identify existing footpaths and estimate movement speeds. The goal is to train a model that can predict how fast rangers are likely to move through different terrain, to support better planning when tracking and intercepting poachers. 
-    
-    My main focus of the first couple weeks has been on developing a method to estimate the likelihood that a footpath exists at any given location. To do this, I’m using kernel density ranking based on GPS point data.
+    For my project, I’m trying to understand the factors affecting the speed of movement of rangers traveling through parks in Nigeria with the goal of improving patrol planning and the interception of poachers. Rangers have been equipped with GPS trackers that log their location and time approximately every five minutes during their patrols. I’m using this GPS data to identify existing footpaths and estimate movement speeds across different terrain types. The ultimate aim is to train a model that can predict ranger movement speeds based on environmental and geographical conditions, enabling more effective route planning.  The first part of this project is focusing on identifying the existing footpaths. 
+  </p>
+  <p>
+    The main focus of the first couple weeks has been on developing a method to estimate the likelihood that a footpath exists at any given location. I began by focusing on Oban National Park, using GPS data collected by rangers during their patrols. While there are routes that rangers frequently travel, they sometimes deviate from these paths due to obstacles or to investigate findings such as poachers’ snares.
+    I need to differentiate the noise from the commonly traveled paths, and identify such paths. My first idea was on some kind of clustering of these gps lines, to group together the data, but ultimately i implemented kernel density ranking based on GPS point data
   </p>
 
   <h2>Kernel Density Estimation</h2>
@@ -141,4 +143,5 @@
 
 </body>
 </html>
+
 
