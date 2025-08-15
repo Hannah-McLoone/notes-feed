@@ -241,6 +241,8 @@ We assume that the distance from  Z<sub>i</sub> to this straight line will be no
   </div>
 
   <p>(delta is our measurement error, which we are assuming to be 0). Then, we find the maximum likelihood estimator of sigma <sub>m</sub> for this. This equation closely resembles the standard form of a normal distribution. However, one aspect puzzles me: I would have expected the first term to be the square root of its current value. I’m not sure why it appears as it does. </p>
+
+    <p>I used this method to find a value of variance for the model. I calculated a value of sigma for each path in the tracklog as some are straighter than others. Below are the results, on the left is a ranked version (using the ranking idea from the previous version) and on the right is the raw intensities (capped to reduce the effect of the long-tail distribution).</p>
   document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.dropdown');
     const button = dropdown.querySelector('.dropdown-button');
