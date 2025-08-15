@@ -236,6 +236,7 @@
 
   <p>The tree-based methods seem to have noticeably better results, they can handle non-linearities and feature interactions, which maybe are prominent in this data. The next steps would be to get better feature data and tune my random forest regressor (hyper-parameters, and further research into rank) with the full data.  
 </p>
+  <p>This would have been the direction I would have pursued, had it not been talking to Rob near the end of the week. He advised against modelling it with kernel density, and instead recommended going back to one of the earlier ideas of brownian bridge. So I instead started implementing this.</p>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.dropdown');
