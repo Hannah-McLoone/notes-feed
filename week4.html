@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Pages</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      margin: 2em;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: #fff;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2em;
+      color: #2c3e50;
+    }
+
+    /* Elegant nav links */
+    nav {
+      display: flex;
+      gap: 1em;
+    }
+
+    nav a {
+      color: #2c3e50;
+      background: transparent;
+      padding: 0.3em 0.6em;
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 1em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      border: none;
+      font-weight: 500;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #2c3e50;
+      color: white;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Dropdown container hidden by default */
+    .dropdown {
+      display: none;
+      position: relative;
+    }
+
+    /* Dropdown button style */
+    .dropdown-button {
+      background: transparent;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      color: #2c3e50;
+      padding: 0.3em 0.6em;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+
+    .dropdown-button:hover,
+    .dropdown-button:focus {
+      background-color: #2c3e50;
+      color: white;
+      outline: none;
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 0.3em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      min-width: 120px;
+      z-index: 10;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5em 1em;
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 400;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+      background-color: #2c3e50;
+      color: white;
+      outline: none;
+    }
+
+    /* Show dropdown menu when active */
+    .dropdown.open .dropdown-menu {
+      display: block;
+    }
+
+    /* Responsive behavior */
+    @media (max-width: 600px) {
+      nav {
+        display: none;
+      }
+      .dropdown {
+        display: block;
+      }
+    }
+
+    main {
+      padding: 2em;
+    }
+
+    footer {
+      background: #f1f1f1;
+      text-align: center;
+      padding: 1em;
+      margin-top: 2em;
+    }
+
+    h2 {
+      color: #2c3e50;
+    }
+
+    img {
+      height: auto;
+      margin: 1em 0;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 50%;
+    }
+
+    .limited-size {
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .figure {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+
+    .figure-caption {
+      font-style: italic;
+      color: #555;
+    }
+
+    code {
+      background-color: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hannah's Weekly Notes</h1>
+
+    <nav>
+      <a href="index.html">Week 1</a>
+      <a href="week2.html">Week 2</a>
+      <a href="week3.html">Week 3</a>
+      <a href="week4.html">Week 4</a>
+      <!-- Add more as needed -->
+    </nav>
+
+    <div class="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="dropdown-button" aria-label="Open navigation menu">☰</button>
+      <div class="dropdown-menu" role="menu" aria-label="Navigation menu">
+        <a href="index.html" role="menuitem">Week 1</a>
+        <a href="week2.html" role="menuitem">Week 2</a>
+        <a href="week3.html" role="menuitem">Week 3</a>
+        <a href="week4.html" role="menuitem">Week 4</a>
+        <!-- Add more as needed -->
+      </div>
+    </div>
+  </header>
+
+  <main>
+  <h2>Brownian Bridges</h2>
+  <p>
+    A brownian bridge is brownian motion with fixed start and end points.
+  </p>
+
+  <p>
+   algorithm: Simulate brownian bridges between GPS points. Do this 100 times and sum the intensities
+ 
+  </p>
+
+
+  <div class="figure">
+    <img src="graphs/brownian_example.png" class="limited-size">
+  </div>
+
+    <p>What we need to decide (and I'm about to cover how we do decide it) is what our ‘Brownian motion variance parameter’ is. This is a measure of how much the rangers wander between GPS points. Are we certain that from each GPS point they walk in a completely straight line to the next GPS point, or do we think that's the most likely path, but there might be some uncertainty as paths aren't always completely straight?
+</p>
+
+<p>How we calculate this value (Laid out in this paper: <a href = 'https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/06-0957.1'>link</a>) 
+</p>
+
+  <p>Basically, we can work out how straight the ranger's movement is by how straight the path is in general.</p>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const dropdown = document.querySelector('.dropdown');
+    const button = dropdown.querySelector('.dropdown-button');
+
+    button.addEventListener('click', function (e) {
+      e.stopPropagation(); // Prevent bubbling to document
+      dropdown.classList.toggle('open');
+      const expanded = dropdown.classList.contains('open');
+      button.setAttribute('aria-expanded', expanded);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+        button.setAttribute('aria-expanded', false);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
