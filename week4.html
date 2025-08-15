@@ -203,7 +203,7 @@
   <main>
   <h2>Brownian Bridges</h2>
   <p>
-    A brownian bridge is brownian motion with fixed start and end points.
+    Following on from the meeting with Rob, I changed the way I was implementing the model, and instead went with a brownian bridge model. A brownian bridge is brownian motion with fixed start and end points. It assumes that the rangers move randomly at each step (with some given standard deviation) between the known start and end points. We run these simulations to calculate the probability density.
   </p>
 
   <p>
@@ -213,7 +213,7 @@
 
 
   <div class="figure">
-    <img src="graphs/brownian_example.png" class="limited-size">
+    <img src="graphs/brownian_exmple.png" class="limited-size">
   </div>
 
     <p>What we need to decide (and I'm about to cover how we do decide it) is what our ‘Brownian motion variance parameter’ is. This is a measure of how much the rangers wander between GPS points. Are we certain that from each GPS point they walk in a completely straight line to the next GPS point, or do we think that's the most likely path, but there might be some uncertainty as paths aren't always completely straight?
@@ -240,6 +240,9 @@ We assume that the distance from  Z<sub>i</sub> to this straight line will be no
     <img src="graphs/whole_load_of_maths.png" class="limited-size">
   </div>
 
+  <div class="figure">
+    <img src="graphs/likelihood_equation.png" class="limited-size">
+  </div>
   <p>(delta is our measurement error, which we are assuming to be 0). Then, we find the maximum likelihood estimator of sigma <sub>m</sub> for this. This equation closely resembles the standard form of a normal distribution. However, one aspect puzzles me: I would have expected the first term to be the square root of its current value. I’m not sure why it appears as it does. </p>
 
     <p>I used this method to find a value of variance for the model. I calculated a value of sigma for each path in the tracklog as some are straighter than others. Below are the results, on the left is a ranked version (using the ranking idea from the previous version) and on the right is the raw intensities (capped to reduce the effect of the long-tail distribution).</p>
@@ -257,6 +260,8 @@ We assume that the distance from  Z<sub>i</sub> to this straight line will be no
     
 
   <p>I have also employed the same tactic as before, of producing separate maps for north, south east and west. Gives us flexibility to investigate how slope affects speed. </p>
+  
+  <p>This has now put me in a very similar position to where I was this time last week, but now with a different underlying model. I have the ranger data in map form and some preliminary feature data. I am back to running the machine learning models.</p>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.dropdown');
