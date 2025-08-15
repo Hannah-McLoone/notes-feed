@@ -222,8 +222,25 @@
 <p>How we calculate this value (Laid out in this paper: <a href = 'https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/06-0957.1'>link</a>) 
 </p>
 
-  <p>Basically, we can work out how straight the ranger's movement is by how straight the path is in general.</p>
-<script>
+  <p>Basically, we can work out how straight the ranger's movement is by how straight the path is in general. 
+For a point of GPS data (Z<sub>i</sub>), we look at the point before it (Z<sub>i-1</sub>), and the point after it (Z<sub>i+1</sub>) and ask ourselves ‘how close is Z<sub>i</sub> to the straight line that joins Z<sub>i-1</sub>, and Z<sub>i+1</sub>
+We assume that the distance from  Z<sub>i</sub> to this straight line will be normally distributed, and so we fit a standard deviation to this data. </p>
+
+
+<p>More formally:
+
+“consider the independent Brownian bridges on the nonoverlapping time intervals [t0, t2], [t2, t4], [t4, t6], ... , [tn-2, tn], while regarding the in-between observation times t1, t3, t5, ... , tn-1 as independent observations from these Brownian bridges”
+</p>
+
+  <div class="figure">
+    <img src="graphs/brownian_fitting.png" class="limited-size">
+  </div>
+
+  <div class="figure">
+    <img src="graphs/whole_load_of_maths.png" class="limited-size">
+  </div>
+
+  <p>(delta is our measurement error, which we are assuming to be 0). Then, we find the maximum likelihood estimator of sigma <sub>m</sub> for this. This equation closely resembles the standard form of a normal distribution. However, one aspect puzzles me: I would have expected the first term to be the square root of its current value. I’m not sure why it appears as it does. </p>
   document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.dropdown');
     const button = dropdown.querySelector('.dropdown-button');
