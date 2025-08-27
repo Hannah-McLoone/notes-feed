@@ -233,6 +233,16 @@
   <p>Now onto the main point I am deliberating over….</p>
 
   <h3>Train/Test split</h3>
+  <div class="figure">
+    <img src="graphs/train_test_split.png" class="limited-size">
+  </div>
+
+  <p>Method 1 suffers from autocorrelation. model will be overly-optimistic in it's success</p>
+  <p>Method 2 does not suffer from autocorrelation as much, but maybe not representative</p>
+
+  <div class="figure">
+    <img src="graphs/blocking.png" class="limited-size">
+  </div>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.dropdown');
