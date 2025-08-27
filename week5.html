@@ -214,9 +214,25 @@
    1) Writing unit tests.
   </p>
   <p>
-   2) Writing code to pipeline the fetching of feature code from google earth engine. Before I was downloading the dataset manually for the areas, but this pipeline gets the relevant area to combine the data into a table with my calculated ranger data. In order to make this data compatible with my code I adjusted my code so it produced pixel grids measured in metres (not degrees). 
+   2) Writing code to pipeline the fetching of feature data from google earth engine. Before I was downloading the dataset manually for the areas, but this pipeline gets the relevant area to combine the data into a table with my calculated ranger data. In order to make this data compatible with my code I adjusted my code so it produced pixel grids measured in metres (not degrees). 
   </p>
 
+  <p>Now that I have all the data, I started to think about how it is being formatted for training the model. I need to consider both the resolution of the map, and the train/test split. The best resolution that all of the features from google earth engine can be downloaded at is 90m. Something I wanted to investigate is how the percentage of data points that are labelled with a path/value changes with resolution (as shown in the figure below).</p>
+
+  <div class="figure">
+    <img src="graphs/highlighted_resolutions.png" class="limited-size">
+  </div>
+
+  <p>The highlighted area is the data that can be used for training/ testing our model. I don't believe it is something that should guide our decision too much, but I was interested to see how it would look.</p>
+  <div class="figure">
+    <img src="graphs/resolution_coverage.png" class="limited-size">
+  </div>
+
+  <p>At my chosen resolution of 90m, about ~15 percent of my land area is labelled.</p>
+
+  <p>Now onto the main point I am deliberating over….</p>
+
+  <h3>Train/Test split</h3>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.dropdown');
