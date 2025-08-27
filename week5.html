@@ -238,11 +238,21 @@
   </div>
 
   <p>Method 1 suffers from autocorrelation. model will be overly-optimistic in it's success</p>
-  <p>Method 2 does not suffer from autocorrelation as much, but maybe not representative</p>
+  <p>Method 2 does not suffer from autocorrelation as much, but maybe not representative in it's training or testing</p>
+
+   <p>To balance both of these ideas, I looked into the idea of creating blocks (formed from many pixels) of train and test data. The figure below has blocks of 2 x 2, but they could be much larger.</p>
 
   <div class="figure">
     <img src="graphs/blocking.png" class="limited-size">
   </div>
+
+  <p>This helps reduce how much the training data is correlated with the test data—but by how much? I would assume that the larger the block size, the lower the correlation between train and test, but at some point this suffers from the same problem as ‘method 2’. I want to know the ideal block size, and if this is a valid method. I’m not really sure how to approach this currently, and have been struggling to find an answer in the literature, but i start by looking at morans I</p>
+
+  <p>Moran’s I calculates the spatial autocorrelation by measuring the covariance of values across space, weighted by how close locations are. You compare this to what you’d expect if the data were randomly distributed, and test for significance.</p>
+  
+  <p>I ran Moran’s I on the rangers’ speed data. An important detail here is that many pixels have no recorded speed, since the rangers never traveled through them. Because Moran’s I cannot handle null values, I set these pixels to zero. To avoid bias from treating “no data” as actual speed, I tested significance by shuffling only the non-zero values. In other words, testing for spatial autocorrelation of speed only <b>within</b> the known data.</p> 
+
+  <p>I’m not sure this is the correct way of doing things, and need to go into further research next week. It is intended to show the autocorrelation between blocks, but doesn't say anything about the autocorrelation within blocks. This within-block autocorrelation still poses an issue and will affect the model, but the between-block autocorrelation is what causes the correlation between train and test data. This is what would make the model look too optimistic. I believe that if I pick a block size that does not show significance in the between-block spatial autocorrelation, then I can at least trust the evaluation of my model.</p>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.dropdown');
