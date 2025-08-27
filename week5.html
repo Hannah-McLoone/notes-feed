@@ -252,6 +252,12 @@
   
   <p>I ran Moran’s I on the rangers’ speed data. An important detail here is that many pixels have no recorded speed, since the rangers never traveled through them. Because Moran’s I cannot handle null values, I set these pixels to zero. To avoid bias from treating “no data” as actual speed, I tested significance by shuffling only the non-zero values. In other words, testing for spatial autocorrelation of speed only <b>within</b> the known data.</p> 
 
+  <p>I want to know how the spatial autocorrelation is affected by block size. I tried investigating this by taking the average speed for each block (a square chunk of pixels) and found the autocorrelation between these averaged values. I did this for different block sizes, and marked which were significant.</p>
+  <p>The graph below shows Moran’s I calculated for blocks of different sizes. Each block is defined as 2^n pixels in both width and height, with each pixel representing 10 m × 10 m. This is different from the 90 m resolution mentioned earlier, but here I wanted to test autocorrelation across a whole range of scales. At the largest block size, 2048 × 2048 pixels, the area covered is roughly 20 km across.</p>
+  <div class="figure">
+    <img src="graphs/mor_i.png" class="limited-size">
+  </div>
+    
   <p>I’m not sure this is the correct way of doing things, and need to go into further research next week. It is intended to show the autocorrelation between blocks, but doesn't say anything about the autocorrelation within blocks. This within-block autocorrelation still poses an issue and will affect the model, but the between-block autocorrelation is what causes the correlation between train and test data. This is what would make the model look too optimistic. I believe that if I pick a block size that does not show significance in the between-block spatial autocorrelation, then I can at least trust the evaluation of my model.</p>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
